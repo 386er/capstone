@@ -13,6 +13,9 @@ In this section, provide brief details on the background information of the doma
 
 With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets can help to improve NIDS and thus strengthening the security posture of organizations.
 
+![GitHub Logo](/citations.png)
+Format: ![Alt Text](url)
+
 This topic also of personal interest to me. I am working in a consulting company that offers a wide range of expertise in the field of IT, which is also cyber security.
 
 ### Problem Statement
@@ -48,7 +51,7 @@ In this final section, summarize a theoretical workflow for approaching a soluti
 
 -----------
 
-**Before submitting your proposal, ask yourself. . .**
+**REFERENCES**
 
 1. Does the proposal you have written follow a well-organized structure similar to that of the project template?
 1. Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
