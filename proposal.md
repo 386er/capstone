@@ -11,9 +11,9 @@ _(approx. 1-2 paragraphs)_
 
 In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. 
 
-With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets could help to improve the security posture of organizations.
+With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets can help to improve NIDS and thus strengthening the security posture of organizations.
 
-This topic also of personal interest to me. I am working in a consulting company that offers a wide range of expertise in the field of IT, which is also cyber security - überarbeiten
+This topic also of personal interest to me. I am working in a consulting company that offers a wide range of expertise in the field of IT, which is also cyber security.
 
 ### Problem Statement
 _(approx. 1 paragraph)_
@@ -50,8 +50,8 @@ In this final section, summarize a theoretical workflow for approaching a soluti
 
 **Before submitting your proposal, ask yourself. . .**
 
-- Does the proposal you have written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your proposal?
-- Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
+1. Does the proposal you have written follow a well-organized structure similar to that of the project template?
+1. Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
+1. Would the intended audience of your project be able to understand your proposal?
+1. Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
+1. Are all the resources used for this project correctly cited and referenced?
