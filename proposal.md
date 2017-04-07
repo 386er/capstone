@@ -40,12 +40,47 @@ In this section, the dataset(s) and/or input(s) being considered for the project
 Dataset downloaded from: https://github.com/defcom17/NSL_KDD
 
 
-The dataset used for the capstone project will be the NSL-KDD dataset, which is a improved* version of the KDD Cup 99 dataset. 
+The dataset used for the capstone project will be the NSL-KDD dataset, which is an improved* version of the KDD Cup 99 dataset. 
 
 
 The latter was created by collecting raw TCP dump data from a simulated U.S. airforce local-area network in the course of 9 weeks. During the data collection the network was deliberately attacked multiple times. Each datapoint represent a connection between a source and target IP, using a well defined protocol, during a well defined time frame. The datapoints consist of 41 features and are labeled either as normal connections or as an attack.
 
-There is a total of 41 types of attacks, however they are grouped into 4 categories
+
+Some of the features are directly derived from the TCP/IP connections during a time interval, however the dataset includes also "higher-level" features that were derived from some of the basic features of the dataset. The first, 'basic' set of features include inputs like duration of the connection (in seconds), the protocol type, the number of bytes from the source to the destination and vice versa. 
+
+The latter, 'higher-level' features include inputs like the number of connections to the same host as the current connecton in the past two seconds, number of connection that use the same service, number of failed login attempts.
+
+
+
+udpstorm,dos,test
+
+
+
+
+
+
+
+
+These features include basic features derived directly
+from a TCP/IP connection, traffic features accumulated
+in a window interval, either time, e.g. two seconds or
+number of connections, and content features extracted from
+the application layer data of connections. Out of 41 features,
+three are nominal, four are binary, and remaining 34 features
+are continuous. The training data contains 23 traffic classes
+that include 22 classes of attack and one normal class. The
+test data contains 38 traffic classes that include 21 attacks
+Figure 2: Various steps involved in our NIDS implementation
+classes from the training data, 16 novel attacks, and one normal
+class.
+
+
+
+
+
+
+
+There is a total of 38 types of attacks, however they are grouped into 4 categories
 
 - DOS (denial of service) e.g. syn flood;
 - R2L (unauthorized access from a remote machine) e.g. guessing password;
@@ -101,18 +136,6 @@ realistic as well.
 
 
 
-These features include basic features derived directly
-from a TCP/IP connection, traffic features accumulated
-in a window interval, either time, e.g. two seconds or
-number of connections, and content features extracted from
-the application layer data of connections. Out of 41 features,
-three are nominal, four are binary, and remaining 34 features
-are continuous. The training data contains 23 traffic classes
-that include 22 classes of attack and one normal class. The
-test data contains 38 traffic classes that include 21 attacks
-Figure 2: Various steps involved in our NIDS implementation
-classes from the training data, 16 novel attacks, and one normal
-class.
 
 
 
