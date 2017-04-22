@@ -5,7 +5,6 @@ April 7th, 2017
 ## Proposal
 
 ### Domain Background
-_(approx. 1-2 paragraphs)_
 
 With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets can help to improve NIDS and thus strengthening the security posture of organizations.
 
@@ -20,20 +19,12 @@ Year | Number of results
 
 However early research in this field dates back to the early nineties (see Debar, 1992). (Noch etwas beifügen!)
 
-
-
-
-
 ### Problem Statement
-_(approx. 1 paragraph)_
-In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
 
-
+Given a set of the inputs from a labeled dataset of network connections, malicious connections shall be identified and correctly labeled. Whether connections were correctly labeled can be clearly observed and the problem can be reprocued.
 
 ### Datasets and Inputs
 _(approx. 2-3 paragraphs)_
-
-
 
 The dataset used for the capstone project will be the NSL-KDD dataset, which is an improved* version of the KDD Cup 99 dataset. It was downloaded from https://github.com/defcom17/NSL_KDD
 A major improvement of the NSL-KDD dataset is the removal of redundant records and some further rearrangement of the data. For an exact description of how the dataset was modified please see http://www.unb.ca/cic/research/datasets/nsl.html
@@ -55,20 +46,36 @@ There is a total of 38 types of attacks, grouped into 4 categories:
 Not all of the attack types that occur in the test set, occur in the training set. This is a specific characteristic of the dataset to make it more realistic. However it is believed, that most of the novel attacks can be derived from the known attacks (see Tavallee, 2009) All types of attacks will be labeled as one of the categories they are grouped in. 
 
 
-
-
 ### Solution Statement
 _(approx. 1 paragraph)_
+
+For the appropriate classification of malicious connections, a neural network will be calibrated and applied.
+
 In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+
 ### Benchmark Model
 _(approximately 1-2 paragraphs)_
 In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+
+
 ### Evaluation Metrics
-_(approx. 1-2 paragraphs)_
-In this section, propose at least one evaluation metric that can be used to quantify the performance of both the benchmark model and the solution model. The evaluation metric(s) you propose should be appropriate given the context of the data, the problem statement, and the intended solution. Describe how the evaluation metric(s) are derived and provide an example of their mathematical representations (if applicable). Complex evaluation metrics should be clearly defined and quantifiable (can be expressed in mathematical or logical terms).
+
+The following metrics will be used to evaluate the performance of both the benchmark model and the applied model:
+
+- Accuracy: Defined as the proportion of true results (both true positives and true negatives) among the total number of datapoints examined.
+
+- Precision: Defined as the ratio of the number of true positives divided by the number of true positives and false positives.
+
+- Recall: Defined as the ratio of number of true positives records divided by the number of true positives and false negatives.
+
+- F-Measure: Defined as the harmonic mean of precision and recall and represents a balance between them.
+
+
 ### Project Design
 _(approx. 1 page)_
 In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
+
+
 -----------
 **REFERENCES**
 1. Does the proposal you have written follow a well-organized structure similar to that of the project template?
