@@ -3,14 +3,24 @@
 Tobias Burri   
 April 7th, 2017
 ## Proposal
+
 ### Domain Background
 _(approx. 1-2 paragraphs)_
-With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets can help to improve NIDS and thus strengthening the security posture of organizations.
-Just like machine learning itself, acedemic research in the application of machine learning to cyber security has grown exponentially in the last years. A brief glance at the search results of Google Scholar for the terms "machine learning cyber security" confirms this development. nochmal überarbeiten, paper nennen
 
-A Neural Network Component for an Intrusion Detection System
-Herve DEBAR; Monique BECKER; Didier SIBONI    
-Published in: Proceeding SP '92 Proceedings of the 1992 IEEE Symposium on Security and Privacy
+With an ever growing number of connected devices, more and more data is transferred over networks, generating a confusing amount of data that has to be monitored. Given this development, manual monitoring becomes increasingly infeasable to prevent cyber attacks. Network Intrusion Detections Systems (NIDS) can help system administrators to detect network breaches, however setting up policies that are both flexible and effectice against unforseen attacks can be challenging. Applying machine learning in the analysis of large log file datasets can help to improve NIDS and thus strengthening the security posture of organizations.
+
+Just like machine learning itself, acedemic research in the application of machine learning to cyber security has grown exponentially over the last years. A brief glance at the search results of Google Scholar for the terms "machine learning" and "cyber security" confirms this development.
+
+Year | Number of results
+------------ | -------------
+2001 | 61
+2006 | 309
+2011 | 1260
+2016 | 6010
+
+However early research in this field dates back to the early nineties (see Debar, 1992). (Noch etwas beifügen!)
+
+
 
 
 
@@ -68,3 +78,6 @@ In this final section, summarize a theoretical workflow for approaching a soluti
 1. Are all the resources used for this project correctly cited and referenced?
 
 [1] M. Tavallaee, E. Bagheri, W. Lu, and A. Ghorbani, “A Detailed Analysis of the KDD CUP 99 Data Set,” Submitted to Second IEEE Symposium on Computational Intelligence for Security and Defense Applications (CISDA), 2009.
+
+[2] H. Debar; M. Becker; D. Siboni, "A Neural Network Component for an Intrusion Detection System", Proceeding SP '92 Proceedings of the 1992 IEEE Symposium on Security and Privacy, 1992
+
