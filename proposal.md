@@ -29,7 +29,11 @@ _(approx. 2-3 paragraphs)_
 The dataset used for the capstone project will be the NSL-KDD dataset, which is an improved* version of the KDD Cup 99 dataset. It was downloaded from https://github.com/defcom17/NSL_KDD
 A major improvement of the NSL-KDD dataset is the removal of redundant records and some further rearrangement of the data. For an exact description of how the dataset was modified please see http://www.unb.ca/cic/research/datasets/nsl.html
 
-The original KDD dataset was created by collecting raw TCP dump data from a simulated U.S. airforce local-area network in the course of 9 weeks. During the data collection the network was deliberately attacked multiple times. Each datapoint represents a connection between a source and target IP, using a well defined protocol, during a well defined time frame. The datapoints consist of 41 features (!!prüfen!!) and are labeled either as normal connections or as an attack.
+
+KDD Cup is the annual Data Mining and Knowledge Discovery competition. 
+
+
+The original KDD dataset was created for the KDD Cup, the annual Data Mining and Knowledge Discovery competition. Raw TCP dump data was collected from a simulated U.S. airforce local-area network in the course of 9 weeks. During the data collection the network was deliberately attacked multiple times. Each datapoint represents a connection between a source and target IP, using a well defined protocol, during a well defined time frame. The datapoints consist of 41 features (!!prüfen!!) and are labeled either as normal connections or as an attack.
 
 Some of the features are directly derived from the TCP/IP connections during a time interval, however the dataset includes also "higher-level" features that were derived from some of the basic features of the dataset. 
 
@@ -57,7 +61,16 @@ In this section, clearly describe a solution to the problem. The solution should
 
 ### Benchmark Model
 _(approximately 1-2 paragraphs)_
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+
+The benchmark model for this capstone project will be the winning model used in the 1999 Data Mining and Knowledge Discovery competition (KDD Cup). The model applied was an ensemble of C5 decision trees. See (Pfahringer, 2000) for a more detailed overview of how this model was implemented.
+
+
+
+
+
+http://cseweb.ucsd.edu/~elkan/clresults.html
+
+
 
 
 ### Evaluation Metrics
@@ -86,4 +99,10 @@ In this final section, summarize a theoretical workflow for approaching a soluti
 [1] M. Tavallaee, E. Bagheri, W. Lu, and A. Ghorbani, “A Detailed Analysis of the KDD CUP 99 Data Set,” Submitted to Second IEEE Symposium on Computational Intelligence for Security and Defense Applications (CISDA), 2009.
 
 [2] H. Debar; M. Becker; D. Siboni, "A Neural Network Component for an Intrusion Detection System", Proceeding SP '92 Proceedings of the 1992 IEEE Symposium on Security and Privacy, 1992
+
+[3] B. Pfahringer, "Winning the KDD99 classification cup: bagged boosting", ACM SIGKDD Explorations Newsletter Homepage archive, Volume 1 Issue 2, January 2000 
+
+[4] C. Elkan, "Results of the KDD'99 classifier learning", ACM SIGKDD Explorations Newsletter Homepage archive, Volume 1 Issue 2, January 2000 
+
+
 
