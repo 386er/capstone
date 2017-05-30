@@ -1,3 +1,15 @@
 rcode.R
 citations.csv
 capstone_data
+KDD99Test.csv
+KDD99Train.csv
+/Data_cleaning/KDD99Test.csv
+/Data_cleaning/KDD99Train.csv
+/Data_cleaning/KDDTest+.csv
+/Data_cleaning/KDDTrain+.csv
+/Data_cleaning/kdd99.p
+/Data_cleaning/nsl-kdd.p
+/Data_cleaning/nsl-kdd2.p
+/Data_exploration/KDD99Test.csv
+/Data_exploration/KDD99Train.csv
+
