@@ -4,7 +4,8 @@ Joe Udacity
 December 31st, 2050
 
 ## I. Definition
-_(approx. 1-2 pages)_
+
+(approx. 1-2 pages)
 
 ### Project Overview
 
@@ -20,7 +21,7 @@ Applying machine learning in the analysis of log files can help NIDS to learn mo
 
 The problem that will be addressed in this project is to create a model, which predicts whether a connection between a source and target IP, represented by a set of features, is an attempt to attack the source network or not. In case of an attack, the model has to predict what kind of attack a malicious connection represents.
 
-An additional challenge which will be addressed in this project is that the type of attacks that the model will be trained on, differ from the type of attacks that its performance will tested on. This is a specific characteristic of the used dataset to make it more realistic. However this does not represent a major constraint; as there is widespread believe that most of the novel attacks can be derived from the known attacks (see Tavallee, 2009).
+An additional challenge which will be addressed in this project is that the type of attacks that the model will be trained on, differ from the type of attacks that its performance will tested on. This is a specific characteristic of the used dataset to make it more realistic. However this does not represent a major constraint, as there is widespread believe that most of the novel attacks can be derived from the known attacks (see Tavallee, 2009).
 
 Assuming that attacks produce a distinctive sequence of events, this capstone project seeks to model network traffic as a time series by applying a long short-term memory (LSTM) Recurrent neural network. Unlike feedforward neural networks, RNNs have cyclic connections making them powerful for modeling sequences. While standard RNNs are only able to model sequences that are up to 10 time steps long, LSTM based RNNs overcome this constraints and allow for much longer sequences to be considered.
 
@@ -28,23 +29,6 @@ Assuming that attacks produce a distinctive sequence of events, this capstone pr
 
 ### Metrics
 In this section, you will need to clearly define the metrics or calculations you will use to measure performance of a model or result in your project. These calculations and metrics should be justified based on the characteristics of the problem and problem domain. Questions to ask yourself when writing this section:
-- _Are the metrics you’ve chosen to measure the performance of your models clearly discussed and defined?_
-- _Have you provided reasonable justification for the metrics chosen based on the problem and solution?_
-
-
-The measures of performance for this project will be the Mean Squared Error (MSE) and Root Mean Squared
-Error (RMSE) calculated as the difference between predicted and actual values of the target stock ticker at daily
-market close. The MSE and RMSE are standards for measuring error for machine learning predictions and will offer
-consistency across all the studies developed, given that all the datasets will be normalized prior to model fitting.
-Additionally, the visualizations from each study will be graphically analyzed for their degree of fit, ability incorporate
-volatility or lag across time, and macro trends for diverging from the test data set. Lastly, the finalized study will be
-measured for the delta between the performance of the benchmark model(s) and our finalized and tuned deep learning
-
-Deep Learning Stock Value Predictor
-model. For this last metric, comparison will be made to the SPY ETF, the initial linear regression model developed,
-and the Lucena Research tool shown in the Machine Learning for Trading11 course. The graph displayed in that course
-shows a 3.64x improvement over the S&P benchmark from 1/1/2009 to 6/18/
-
 
 
 The following metrics will be used to evaluate the performance of the applied model in comparison to the benchmark model:
@@ -54,3 +38,56 @@ False Postitive Rate: Defined as the ratio between the number of normal connecti
 Precision: Defined as the ratio of the number of true positives divided by the number of true positives and false positives.
 Recall: Defined as the ratio of number of true positives records divided by the number of true positives and false negatives.
 Evaluation Metrics will be applied for the Global Test Dataset as well as for every type of connection (NORMAL; PROBE; DOS; U2R; R2L)
+
+
+- It would be better if you avoid reporting accuracy for this dataset. Accuracy is really not the appropriate metric due to the high imbalance in the data, thus it can be misleading.
+- Precision and recall are good metrics for this problem. I would also suggest using F1-score (harmonic mean of precision and recall)
+- You are probably already considering it, but you should really look at the confusion matrix for every model you generate. It will give you a good overview of how the model is behaving with respect to specific class labels.
+
+
+## II. Analysis
+
+(approx. 2-4 pages)
+
+### Data Exploration
+
+
+The dataset used for the capstone project will be the KDD Cup 1999 Data, which was prepared for the Third International Knowledge Discovery and Data Mining Tools Competition. The competition task was to build a network intrusion detector, a predictive model capable of distinguishing between 'bad' connections, called intrusions or attacks, and 'good' normal connections It was downloaded from this site.
+
+The KDD dataset was created by collecting raw TCP dump data from a simulated U.S. airforce local-area network in the course of 9 weeks. During the data collection the network was deliberately attacked multiple times. Each datapoint represents a connection between a source and target IP, using a well defined protocol, during a well defined time frame. Each datapoint is made up of 41 features and is labeled either as a normal connections or as an attack. Some of the features are directly derived from the TCP/IP connections during a time interval, however the dataset includes also "higher-level" features that were derived from some of the basic features of the dataset.
+
+
+The 'basic' set of features include inputs like duration of the connection (in seconds), the protocol type, the number of bytes from the source to the destination and vice versa.
+
+The 'higher-level' features include inputs like the number of connections to the same host as the current connecton in the past two seconds, number of connection that use the same service, number of failed login attempts.
+
+
+A datapoint looks as following:
+
+
+The d
+
+
+
+
+There are a total of 494021 observations in the training set.
+There are a total of 311029 observations in the test set.
+Fields are of type: continuous and of type: symbolic
+Number of fields of type "continous": 39
+Number of fields of type "symbolic": 4
+
+
+
+
+
+
+
+
+
+
+In this section, you will be expected to analyze the data you are using for the problem. This data can either be in the form of a dataset (or datasets), input data (or input files), or even an environment. The type of data should be thoroughly described and, if possible, have basic statistics and information presented (such as discussion of input features or defining characteristics about the input or environment). Any abnormalities or interesting qualities about the data that may need to be addressed have been identified (such as features that need to be transformed or the possibility of outliers). Questions to ask yourself when writing this section:
+
+If a dataset is present for this problem, have you thoroughly discussed certain features about the dataset? Has a data sample been provided to the reader?
+If a dataset is present for this problem, are statistics about the dataset calculated and reported? Have any relevant results from this calculation been discussed?
+If a dataset is not present for this problem, has discussion been made about the input space or input data for your problem?
+Are there any abnormalities or characteristics about the input space or dataset that need to be addressed? (categorical variables, missing values, outliers, etc.)
