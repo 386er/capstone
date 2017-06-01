@@ -21,28 +21,32 @@ Applying machine learning in the analysis of log files can help NIDS to learn mo
 
 The problem that will be addressed in this project is to create a model, which predicts whether a connection between a source and target IP, represented by a set of features, is an attempt to attack the source network or not. In case of an attack, the model has to predict what kind of attack a malicious connection represents.
 
-An additional challenge which will be addressed in this project is that the type of attacks that the model will be trained on, differ from the type of attacks that its performance will tested on. This is a specific characteristic of the used dataset to make it more realistic. However this does not represent a major constraint, as there is widespread believe that most of the novel attacks can be derived from the known attacks (see Tavallee, 2009).
+An additional challenge which will be addressed in this project is that the type of attacks that the model will be trained on, differ from the type of attacks that its performance will tested on. This is a specific characteristic of the used dataset to make it more realistic. However this does not represent a major constraint, as there is widespread believe that most of the novel attacks can be derived from known attacks (see Tavallee, 2009).
 
 Assuming that attacks produce a distinctive sequence of events, this capstone project seeks to model network traffic as a time series by applying a long short-term memory (LSTM) Recurrent neural network. Unlike feedforward neural networks, RNNs have cyclic connections making them powerful for modeling sequences. While standard RNNs are only able to model sequences that are up to 10 time steps long, LSTM based RNNs overcome this constraints and allow for much longer sequences to be considered.
 
 
 
 ### Metrics
-In this section, you will need to clearly define the metrics or calculations you will use to measure performance of a model or result in your project. These calculations and metrics should be justified based on the characteristics of the problem and problem domain. Questions to ask yourself when writing this section:
-
 
 The following metrics will be used to evaluate the performance of the applied model in comparison to the benchmark model:
-Accuracy: Defined as the proportion of true results (both true positives and true negatives) among the total number of datapoints examined.
-True Positive Rate: Defined as the ratio between the number of attacks correctly categorized as attacks and the total number of attacks.
-False Postitive Rate: Defined as the ratio between the number of normal connections wrongly categorized as attacks and the total number of normal connections.
-Precision: Defined as the ratio of the number of true positives divided by the number of true positives and false positives.
-Recall: Defined as the ratio of number of true positives records divided by the number of true positives and false negatives.
+
+- Accuracy: Defined as the proportion of true results (both true positives and true negatives) among the total number of datapoints examined.
+
+- True Positive Rate: Defined as the ratio between the number of attacks correctly categorized as attacks and the total number of attacks.
+
+- False Postitive Rate: Defined as the ratio between the number of normal connections wrongly categorized as attacks and the total number of normal connections.
+
+- Precision: Defined as the ratio of the number of true positives divided by the number of true positives and false positives.
+
+- Recall: Defined as the ratio of number of true positives records divided by the number of true positives and false negatives.
 Evaluation Metrics will be applied for the Global Test Dataset as well as for every type of connection (NORMAL; PROBE; DOS; U2R; R2L)
 
+- F1-Score: Defined as the harmonic mean of precision and recall
 
-- It would be better if you avoid reporting accuracy for this dataset. Accuracy is really not the appropriate metric due to the high imbalance in the data, thus it can be misleading.
-- Precision and recall are good metrics for this problem. I would also suggest using F1-score (harmonic mean of precision and recall)
-- You are probably already considering it, but you should really look at the confusion matrix for every model you generate. It will give you a good overview of how the model is behaving with respect to specific class labels.
+The use of accuracy for this dataset is problematic insofar as there is a high imbalance betweeen different types of attack which might be misleading. However for every generated model, the considered metrices will be complemented by the corresponding confusion matrix. Hence the global performance of the model will be considered, as well as the attack-type specific performance.
+
+
 
 
 ## II. Analysis
