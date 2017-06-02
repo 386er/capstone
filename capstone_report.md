@@ -106,5 +106,26 @@ There is a revisited version of the dataset with an altered class distribution t
 ### Benchmark
 
 
+The benchmark model for this capstone project will be the winning model used in the 1999 Data Mining and Knowledge Discovery competition (KDD Cup). The model applied was an ensemble of C5 decision trees. See (Pfahringer, 2000) for a more detailed overview of how this model was implemented.
+
+This model resulted in the following confusion matrix (Taken from Elkan, 2000):
+
+Actual →		0		1		2		3		4		%Correct
+Predicted ↓						
+0				60262	243		78		4		6		99.5%
+1				511		3471	184		0		0		83.3%
+2				5299	1328	223226	0		0		97.1%
+3				68		20		0		30		10		13.2%
+4				14527	294		0		8		1360	8.4%
+%correct		74.6%	64.8%	99.9%	71.4%	98.8%	
+
+
+
+
+
+
+
+
+
 
 
