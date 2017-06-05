@@ -1,4 +1,5 @@
 rcode.R
+*.pyc
 citations.csv
 capstone_data
 KDD99Test.csv

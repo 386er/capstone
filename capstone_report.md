@@ -121,6 +121,61 @@ Predicted ↓
 
 
 
+## III. Methodology
+_(approx. 3-5 pages)_
+
+### Data Preprocessing
+
+Since the dataset used in this project was initially prepared for data mining competition no effort had to be spend on cleaning it. First this can be justified by the fact that it contains no missing entries. Second, since this project deals with intrusion detection, the author of this report saw no need to remove potential outliers.
+
+The data was then preprocessed in the following order:
+
+
+1. The 38 different attack types are mapped to their corresponding group.
+-----------
+normal                      ==>   NORMAL
+back,land ..                ==>   DOS
+satan,ipsweep,nmap, ..      ==>   PROBE
+ftp_write,guess_passwd, ..  ==>   R2L
+rootkit,perl ..             ==>   U2R
+
+
+2. 5 different types of connections are encoded into integers
+-----------
+NORMAL         ==>   0
+DOS            ==>   1
+PROBE          ==>   2
+R2L            ==>   3
+U2R            ==>   4
+
+
+3. Categorial features (protocol_types, service, flags) are encoded into integers.
+-----------
+protocol_types:
+['tcp' 'udp' 'icmp']                          ==> [0, 1, 2]
+service:
+['ftp_data', 'telnet', ... 'rje', 'harvest']  ==> [0, 1, .... 67, 68]
+flags:
+['SF', 'S0', ...  ,'S2', 'OTH']               ==> [ 0, 1 ... , 9, 10]
+
+
+4. Scale features to values between 0 and 1
+------------
+For each feature, subtract the min value from the datapoint and divide it by the max value subtracted by the min value.
+
+
+5. Binarize labels to vectors of the size 5
+------------
+0            ==>   [1,0,0,0,0]
+1            ==>   [0,1,0,0,0]
+2            ==>   [0,0,1,0,0]
+3            ==>   [0,0,0,1,0]
+4            ==>   [0,0,0,0,1]
+
+
+
+
+
 
 
 
