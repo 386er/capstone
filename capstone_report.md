@@ -102,6 +102,33 @@ There is a revisited version of the dataset with an altered class distribution t
 ### Algorithms and Techniques
 
 
+Given the type of problem for this project, applying a standard feedforward neural network would most likely produce suboptimal results. Assuming that most attacks produce a specific signature, meaning a pattern that can be observed for multiple consecutive connections, the standard neural network would treat every single connection independently of its current position. Recurrent neural networks however maintain an internal state at each time step of the classification, which allows them to use information from previous connections for the processing of current connections. This stored memory should greatly increase their effectiveness in classifiying sequences of network connections. 
+
+
+1. Input Parameters
+
+ - Input formatting
+
+2. Neural Network Architecture
+
+ - Cell Type
+ - Number of Cells 
+ - Number of Hidden Nodes 
+
+3. Training Parameter
+
+ - Batch Size (how many time steps to include during a single training step; kept constant at 1)
+ - Optimizer Function (which function to optimize by mimizing error; used “Adam” throughout)
+ - Epochs (how many times to run through the training process; kept mostly at 1 for time savings until later studies)
+
+
+Questions:
+
+Are the algorithms you will use, including any default variables/parameters in the project clearly defined?
+Are the techniques to be used thoroughly discussed and justified?
+Is it made clear how the input data or datasets will be handled by the algorithms and techniques chosen?
+
+
 
 ### Benchmark
 
@@ -131,7 +158,7 @@ Since the dataset used in this project was initially prepared for data mining co
 The data was then preprocessed in the following order:
 
 
-1. The 38 different attack types are mapped to their corresponding group.
+1. The 38 different attack types are mapped to their corresponding attack group.
 -----------
 normal                      ==>   NORMAL
 back,land ..                ==>   DOS
@@ -171,16 +198,4 @@ For each feature, subtract the min value from the datapoint and divide it by the
 2            ==>   [0,0,1,0,0]
 3            ==>   [0,0,0,1,0]
 4            ==>   [0,0,0,0,1]
-
-
-
-
-
-
-
-
-
-
-
-
 
