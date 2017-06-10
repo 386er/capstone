@@ -102,7 +102,12 @@ There is a revisited version of the dataset with an altered class distribution t
 ### Algorithms and Techniques
 
 
-Given the type of problem for this project, applying a standard feedforward neural network would most likely produce suboptimal results. Assuming that most attacks produce a specific signature, meaning a pattern that can be observed for multiple consecutive connections, the standard neural network would treat every single connection independently of its current position. Recurrent neural networks however maintain an internal state at each time step of the classification, which allows them to use information from previous connections for the processing of current connections. This stored memory should greatly increase their effectiveness in classifiying sequences of network connections. 
+Given the type of problem for this project, applying a standard feedforward neural network would most likely produce suboptimal results. Assuming that most attacks produce a specific signature, meaning a pattern that can be observed for multiple consecutive connections, the standard neural network would treat every single connection independently of its current position. Recurrent neural networks however maintain an internal state at each time step of the classification, which allows them to use information from previous connections for the processing of current connections. This stored "memory" should greatly increase their effectiveness in classifiying sequences of network connections. 
+
+Basic Recurrent neural networks however also face a number of limitations that makes it hard for the to be trained on sequences that surpass a certain threshhold. 
+
+
+Following parameters can be tuned for the model implementation:
 
 
 1. Input Parameters
