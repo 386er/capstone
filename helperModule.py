@@ -121,6 +121,14 @@ def splitData(dataset):
 	return features, labels
 
 
+def getBenchmarkResults():
+
+	results_bench = [60262, 243, 78, 4, 6,511, 3471, 184, 0, 0, 5299, 1328, 223226, 0, 0, 68, 20, 0, 30, 10, 14527, 294, 0, 8, 1360]
+	conf_bench = np.array(results_bench).reshape(5,5)
+
+	return conf_bench
+
+
 
 def computePerformanceMetrics(conf_benchmark, conf_model):
     
@@ -166,7 +174,11 @@ def plotMetrics(metrics):
 
 	fig = plt.figure(figsize=(18,8))
 	gs  = gridspec.GridSpec(2, 4, height_ratios=[0.3,1])
-	ax1 = plt.subplot(gs[0,  :])
+	ax1 = plt.subplot(gs[0, 0:2])
+	axt = plt.text(1.3, 1.5, str(metrics['accuracy_bench'])[0:5], size=50, ha="center", va="center")
+	axt = plt.text(1.8, 1.5, str(metrics['accuracy_model'])[0:5], size=50, ha="center", va="center")
+	axt = plt.text(1.3, 1, 'Benchmark Accuracy', size=15, ha="center", va="center")
+	axt = plt.text(1.8, 1, 'Model Accuracy', size=15, ha="center", va="center")
 	ax2 = plt.subplot(gs[1, 0:1])
 	ax3 = plt.subplot(gs[1, 1:2])
 	ax4 = plt.subplot(gs[1, 2:3])
@@ -176,207 +188,64 @@ def plotMetrics(metrics):
 	x2 = [2,6,10,14,18]
 
 
-	ax1.barh([1], [metrics['accuracy_bench']], height=0.4)
-	ax1.barh([2], [metrics['accuracy_model']], height=0.4)
+	ax1.barh([1], [metrics['accuracy_bench']], height=0.4, color='steelblue')
+	ax1.barh([2], [metrics['accuracy_model']], height=0.4, color='darkorange')
 	ax1.set_yticks([1,2])
 	ax1.set_yticklabels(['Bench','Model'])
-	ax1.set_xlabel('Accuracy')
+	ax1.set_xlabel('Accuracy', weight='bold')
 
 
 	ax2.bar(x1, metrics['tpr_bench'], label='Benchmark')
 	ax2.bar(x2, metrics['tpr_model'], label="Model")
-	ax2.set_xlabel('TPR')
+	ax2.set_xlabel('TPR', weight='bold')
 	ax2.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax2.set_xticklabels([0,1,2,3,4])
+	ax2.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
 	ax2.legend()
 
 	ax3.bar(x1, metrics['fpr_bench'], label='Benchmark')
 	ax3.bar(x2, metrics['fpr_model'], label="Model")
-	ax3.set_xlabel('FPR')
+	ax3.set_xlabel('FPR', weight='bold')
 	ax3.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax3.set_xticklabels([0,1,2,3,4])
+	ax3.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
 
 	ax4.bar(x1, metrics['prec_bench'], label='Benchmark')
 	ax4.bar(x2, metrics['prec_model'], label="Model")
-	ax4.set_xlabel('Precision')
+	ax4.set_xlabel('Precision', weight='bold')
 	ax4.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax4.set_xticklabels([0,1,2,3,4])
+	ax4.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
 
 	ax5.bar(x1, metrics['f1_bench'], label='Benchmark')
 	ax5.bar(x2, metrics['f1_model'], label="Model")
-	ax5.set_xlabel('F1-Score')
+	ax5.set_xlabel('F1-Score', weight='bold')
 	ax5.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax5.set_xticklabels([0,1,2,3,4])
-
-
+	ax5.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
 
 	plt.show()
 
 
 
-
-
-
-
-
-
-'''
-
-
-fig = plt.figure(figsize=(18,8))
-gs  = gridspec.GridSpec(2, 4, height_ratios=[0.3,1])
-ax1 = plt.subplot(gs[0,  :])
-ax2 = plt.subplot(gs[1, 0:1])
-ax3 = plt.subplot(gs[1, 1:2])
-ax4 = plt.subplot(gs[1, 2:3])
-ax5 = plt.subplot(gs[1, 3:4])
-
-x1 = [1,5,9,13,17]
-x2 = [2,6,10,14,18]
-
-
-ax1.barh([1], [accuracy_bench], height=0.4)
-ax1.barh([2], [val_accuracy], height=0.4)
-ax1.set_yticks([1,2])
-ax1.set_yticklabels(['Bench','Model'])
-ax1.set_xlabel('Accuracy')
-
-
-ax2.bar(x1, metrics['tpr_bench'], label='Benchmark')
-ax2.bar(x2, metrics['tpr_model'], label="Model")
-ax2.set_xlabel('TPR')
-ax2.set_xticks([1.5,5.5,9.5,13.5,17.5])
-ax2.set_xticklabels([0,1,2,3,4])
-ax2.legend()
-
-ax3.bar(x1, metrics['fpr_bench'], label='Benchmark')
-ax3.bar(x2, metrics['fpr_model'], label="Model")
-ax3.set_xlabel('FPR')
-ax3.set_xticks([1.5,5.5,9.5,13.5,17.5])
-ax3.set_xticklabels([0,1,2,3,4])
-
-ax4.bar(x1, metrics['prec_bench'], label='Benchmark')
-ax4.bar(x2, metrics['prec_model'], label="Model")
-ax4.set_xlabel('Precision')
-ax4.set_xticks([1.5,5.5,9.5,13.5,17.5])
-ax4.set_xticklabels([0,1,2,3,4])
-
-ax5.bar(x1, metrics['f1_bench'], label='Benchmark')
-ax5.bar(x2, metrics['f1_model'], label="Model")
-ax5.set_xlabel('F1-Score')
-ax5.set_xticks([1.5,5.5,9.5,13.5,17.5])
-ax5.set_xticklabels([0,1,2,3,4])
-
-
-
-plt.show()
-
-
-'''
-
-
-
-
-
-
-
-
-
-'''
-
-
-tpr = [float(conf_matrix[i][i])/(conf_matrix.sum(axis=1)[i]) if conf_matrix.sum(axis=1)[i] > 0 else float(conf_matrix[i][i])/(conf_matrix.sum(axis=0)[i] + 1)  for i,value in enumerate(conf_matrix.sum(axis=1))]
-
-print 'TPR NORMAL %.2f %%' % (tpr[0] * 100)
-print 'TPR PROBE  %.2f %%' % (tpr[1] * 100)
-print 'TPR DOS    %.2f %%' % (tpr[2] * 100)
-print 'TPR U2R    %.2f %%' % (tpr[3] * 100)
-print 'TPR R2L    %.2f %%' % (tpr[4] * 100)
-
-print '************'
-
-fpr = [float((conf_matrix.sum(axis=1)[i] - conf_matrix[i][i])) / conf_matrix.sum(axis=1)[i] if conf_matrix.sum(axis=1)[i] > 0 else float((conf_matrix.sum(axis=1)[i] - conf_matrix[i][i])) / (conf_matrix.sum(axis=1)[i] + 1 ) for i,value in enumerate(conf_matrix.sum(axis=1))]
-
-print 'FPR NORMAL %.2f %%' % (fpr[0] * 100)
-print 'FPR PROBE  %.2f %%' % (fpr[1] * 100)
-print 'FPR DOS    %.2f %%' % (fpr[2] * 100)
-print 'FPR U2R    %.2f %%' % (fpr[3] * 100)
-print 'FPR R2L    %.2f %%' % (fpr[4] * 100)
-
-print '************'
-
-precision = [float(conf_matrix[i][i])/(conf_matrix.sum(axis=0)[i]) if conf_matrix.sum(axis=0)[i] > 0 else float(conf_matrix[i][i])/(conf_matrix.sum(axis=0)[i] + 1)  for i,value in enumerate(conf_matrix.sum(axis=0))]
-
-print 'Precision NORMAL %.2f %%' % (precision[0] * 100)
-print 'Precision PROBE  %.2f %%' % (precision[1] * 100)
-print 'Precision DOS    %.2f %%' % (precision[2] * 100)
-print 'Precision U2R    %.2f %%' % (precision[3] * 100)
-print 'Precision R2L    %.2f %%' % (precision[4] * 100)
-
-print '************'
-
-f1_score = [2*(precision[i]*tpr[i])/(precision[i]+tpr[i] + 0.0000001) for i in range(len(tpr))]
-
-print 'F1_score NORMAL %.2f %%' % (f1_score[0] * 100)
-print 'F1_score PROBE  %.2f %%' % (f1_score[1] * 100)
-print 'F1_score DOS    %.2f %%' % (f1_score[2] * 100)
-print 'F1_score U2R    %.2f %%' % (f1_score[3] * 100)
-print 'F1_score R2L    %.2f %%' % (f1_score[4] * 100)
-
-
-
-
-fig = plt.figure(figsize=(18,4))
-	gs  = gridspec.GridSpec(2, 4, height_ratios=[1])
-	ax1 = plt.subplot(gs[0,  :])
-	ax2 = plt.subplot(gs[1, 0:1])
-	ax3 = plt.subplot(gs[1, 1:2])
-	ax4 = plt.subplot(gs[1, 2:3])
-	ax5 = plt.subplot(gs[1, 3:4])
-
-	x1 = [1,5,9,13,17]
-	x2 = [2,6,10,14,18]
-	y = [2,6,8,3,2]
-
-
-	ax1.bar(x1, metrics['tpr_bench'], label='Benchmark')
-	ax1.bar(x2, metrics['tpr_model'], label="Model")
-	ax1.set_xlabel('TPR')
-	ax1.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax1.set_xticklabels([0,1,2,3,4])
-	ax1.legend()
-
-	ax2.bar(x1, metrics['fpr_bench'], label='Benchmark')
-	ax2.bar(x2, metrics['fpr_model'], label="Model")
-	ax2.set_xlabel('FPR')
-	ax2.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax2.set_xticklabels([0,1,2,3,4])
-
-	ax3.bar(x1, metrics['prec_bench'], label='Benchmark')
-	ax3.bar(x2, metrics['prec_model'], label="Model")
-	ax3.set_xlabel('Precision')
-	ax3.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax3.set_xticklabels([0,1,2,3,4])
-
-	ax4.bar(x1, metrics['f1_bench'], label='Benchmark')
-	ax4.bar(x2, metrics['f1_model'], label="Model")
-	ax4.set_xlabel('F1-Score')
-	ax4.set_xticks([1.5,5.5,9.5,13.5,17.5])
-	ax4.set_xticklabels([0,1,2,3,4])
-
-
-
-	plt.show()
-
-
-
-
-
-
-
-
-
-'''
+def getLabelCount(dataset):
+
+	normal = 0
+	dos = 0
+	probe = 0
+	u2r = 0
+	r2l = 0
+
+	for entry in dataset:
+		if entry[0] == 1:
+			normal += 1
+		if entry[1] == 1:
+			dos += 1
+		if entry[2] == 1:
+			probe += 1
+		if entry[3] == 1:
+			u2r += 1
+		if entry[4] == 1:
+			r2l += 1
+
+	return [normal, dos, probe, u2r, r2l]
+    
 
 
 
