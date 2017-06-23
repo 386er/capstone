@@ -14,4 +14,4 @@ KDD99Train.csv
 /Data_cleaning/nsl-kdd2.p
 /Data_exploration/KDD99Test.csv
 /Data_exploration/KDD99Train.csv
-
+/.ipynb_checkpoints/*
