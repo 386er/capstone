@@ -264,6 +264,63 @@ def running_mean(l, N):
     return result
 
 
+def showDataDistribution(data):
+
+	features = data.columns
+
+	fig = plt.figure(figsize=(12,13))
+	gs  = gridspec.GridSpec(5, 3, height_ratios=[0.2,0.2,0.2,0.2,0.2],width_ratios=[0.33,0.33,0.33])
+
+	ax1 = plt.subplot(gs[0, 0:1])
+	ax2 = plt.subplot(gs[0, 1:2])
+	ax3 = plt.subplot(gs[0, 2:3])
+	
+	ax4 = plt.subplot(gs[1, 0:1])
+	ax5 = plt.subplot(gs[1, 1:2])
+	ax6 = plt.subplot(gs[1, 2:3])
+
+	ax7 = plt.subplot(gs[2, 0:1])
+	ax8 = plt.subplot(gs[2, 1:2])
+	ax9 = plt.subplot(gs[2, 2:3])
+	
+	ax10 = plt.subplot(gs[3, 0:1])
+	ax11 = plt.subplot(gs[3, 1:2])
+	ax12 = plt.subplot(gs[3, 2:3])
+
+	ax13 = plt.subplot(gs[4, 0:1])
+	ax14 = plt.subplot(gs[4, 1:2])
+	ax15 = plt.subplot(gs[4, 2:3])
+
+
+
+	ax1.plot(data[features[0]], label=features[0])
+	ax2.plot(data[features[4]], label=features[4])
+	ax3.plot(data[features[5]], label=features[5])
+	ax4.plot(data[features[6]], label=features[6])
+
+	ax5.plot(data[features[7]], label=features[7])
+	ax6.plot(data[features[8]], label=features[8])
+	ax7.plot(data[features[9]], label=features[9])
+	ax8.plot(data[features[10]], label=features[10])
+
+	ax9.plot(data[features[11]], label=features[11])
+	ax10.plot(data[features[12]], label=features[12])
+	ax11.plot(data[features[13]], label=features[13])
+	ax12.plot(data[features[14]], label=features[14])
+
+	ax13.plot(data[features[15]], label=features[15])
+	ax14.plot(data[features[16]], label=features[16])
+	ax15.plot(data[features[17]], label=features[17])
+
+
+
+	plt.show()
+
+	return fig
+
+
+
+
 
 
 
