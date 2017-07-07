@@ -96,6 +96,13 @@ There is a revisited version of the dataset with an altered class distribution t
 
 ### Exploratory Visualization
 
+The information content of the features becomes obvious in the correlation heat matrix. In particular the distinction between "basic features", which were derived from the packet data itself such as the duration, or the source and destination bytes and "higher features", which were engineered with additional domain knowledge. The first 20 features (exluding categorial variables, such as flag or service) show very little correlation among each other, meaning they contain a lot of information that potentially helps to classify different attack types. The remaining 20 features show very high levels of correlation, meaning they contain a l ot of redundant information.
+
+Heatcorrelation matrix
+
+
+Looking at the distribution of the first 15 (discrete) features, it becomes obvious that most data points are concentrated on certain values, making some features almost categorial, although they are considered having discrete distributions.
+
 
 
 
@@ -203,4 +210,96 @@ For each feature, subtract the min value from the datapoint and divide it by the
 2            ==>   [0,0,1,0,0]
 3            ==>   [0,0,0,1,0]
 4            ==>   [0,0,0,0,1]
+
+
+
+### Implementation
+
+The complete project was setup using jupyter notebooks. As a first step a new anaconda environment was created to ensure all employed software meets the Udacity project requirement. A number of basic libraries (numpy, pandas, scikit-learn, tensorflow) were then installed.  The first notebook was setup to preproccess the data as described in the previous section (transform_data.ipynb)
+
+To ensure the features and labels were correctly formatted a basic feed-forward neural network was created (basic_nn.ipynb) and tested successfully. The output of the loss function of the train and validation data were then visualized with matplotlib for later hyperparameter tuning. In the next step, functions were provided to compute evaluation metrics (TPR/Recall, FPR, Precision, F1-Score), all based on the confusion matrix, which is computed every time the model is trained. Finally a dashboard was created with matplotlib that compares the model performance with the benchmark performance for each type of connection.
+
+In the next step, the exisiting simple feed forward neural network architecture was modified to an RNN LSTM architecture. This included the reshaping of inputs as well as the network function itself (basic_rnn.ipynb). This notebook was then extended by a multi-layer LSTM archticture (mutlicell_rnn).
+
+Finally a dropout wrapper was added to the lstm network (multicell_rnn_dropout).
+
+
+
+
+### Refinement
+
+#learning_rates = [1./10**i for i in range(1,7)]
+#learning_rates = [0.001]
+#batch_size = [2**i for i in range(4,10)] # [16, 32, 64, 128, 256, 512]
+#n_hidden = [2**i for i in range(4,10)]  [16, 32, 64, 128, 256, 512]
+keep_rates = [0.5 + 0.05 * i for i in range(10)]
+#training_iters = [i for i in range(5000000, 25000000, 1000000)]
+training_iters = 25000000
+
+
+For the purpose of hyperparameter tuning an additional ipython notebook was created (hypermeter_tuning.ipynb). The refinement process. Starting with 2 lstm layers, and 128 hidden units for each cell and 12000000 training iterations the learning_rate and batch size were refined.
+
+It gave the following results:
+
+.....
+
+
+In a next step, the number of hidden units were tested, while keeping learning_rate constant at 0.001. It turned out
+128 ist just sweeet.
+
+Finally training iters were tested because I say say so.
+
+Dropout was also tested, but it sucks ass, doesnt help.
+
+The final parameter are:
+
+
+
+
+
+### Model Evaluation and Validation
+In this section, the final model and any supporting qualities should be evaluated in detail. It should be clear how the final model was derived and why this model was chosen. In addition, some type of analysis should be used to validate the robustness of this model and its solution, such as manipulating the input data or environment to see how the model’s solution is affected (this is called sensitivity analysis). Questions to ask yourself when writing this section:
+- _Is the final model reasonable and aligning with solution expectations? Are the final parameters of the model appropriate?_
+- _Has the final model been tested with various inputs to evaluate whether the model generalizes well to unseen data?_
+- _Is the model robust enough for the problem? Do small perturbations (changes) in training data or the input space greatly affect the results?_
+- _Can results found from the model be trusted?_
+
+
+The model parameters chosen for the project all seem in a reasonable range. Testing was performed with varius parameter combinations, and small changes in the parameter did not greatly affect the performance of the results. The author comes to the conclusion that the model can be trusted.
+
+
+
+### Justification
+In this section, your model’s final solution and its results should be compared to the benchmark you established earlier in the project using some type of statistical analysis. You should also justify whether these results and the solution are significant enough to have solved the problem posed in the project. Questions to ask yourself when writing this section:
+- _Are the final results found stronger than the benchmark result reported earlier?_
+- _Have you thoroughly analyzed and discussed the final solution?_
+- _Is the final solution significant enough to have solved the problem?_
+
+
+The found results are slightly worse than the benchmark model. Discussion of paramters of every parameter.
+
+The final solution is able to identify the majority of attacks, generatif low false positive rates for most of the malicous connections. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
