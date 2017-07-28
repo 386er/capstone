@@ -109,36 +109,26 @@ Looking at the distribution of the first 15 (discrete) features, it becomes obvi
 ### Algorithms and Techniques
 
 
-Given the type of problem for this project, applying a standard feedforward neural network would most likely produce suboptimal results. Assuming that most attacks produce a specific signature, meaning a pattern that can be observed for multiple consecutive connections, the standard neural network would treat every single connection independently of its current position. Recurrent neural networks however maintain an internal state at each time step of the classification, which allows them to use information from previous connections for the processing of current connections. This stored "memory" should greatly increase their effectiveness in classifiying sequences of network connections. 
+Given the type of problem for this project, applying a standard feedforward neural network presumably produces suboptimal results. Assuming that most attacks produce a specific signature, meaning a pattern that can be observed for multiple consecutive connections, the standard neural network would treat every single connection independently of its current position. Recurrent neural networks however maintain an internal state at each time step of the classification, which allows them to use information from previous connections for the processing of current connections. This stored "memory" should greatly increase their effectiveness in classifiying sequences of network connections. 
 
-Basic Recurrent neural networks however also face a number of limitations that makes it hard for the to be trained on sequences that surpass a certain threshhold. 
+Besides general parameter that can be tuned for most models (such as the chosen optimizer, the number of training iterations, the batch size and the numbers of input variables considered in case of multivariate data), LSTM networks consist of cells, or also often referred to as blocks, that contain hidden units, which are a direct representation the learning capacity of the neural network.
 
 
 Following parameters can be tuned for the model implementation:
 
 
-1. Input Parameters
+1. Neural Network Architecture
 
- - Input formatting
+ - Number of Cells (Default = 2)
+ - Number of Hidden Nodes
+ - Cell type (tensorflow offers a variety of cells, LSTM cell was used throughout.)
 
-2. Neural Network Architecture
+2. Training Parameter
 
- - Cell Type
- - Number of Cells 
- - Number of Hidden Nodes 
-
-3. Training Parameter
-
- - Batch Size (how many time steps to include during a single training step; kept constant at 1)
+ - Batch Size (how many time steps to include during a single training step; )
  - Optimizer Function (which function to optimize by mimizing error; used “Adam” throughout)
  - Epochs (how many times to run through the training process; kept mostly at 1 for time savings until later studies)
 
-
-Questions:
-
-Are the algorithms you will use, including any default variables/parameters in the project clearly defined?
-Are the techniques to be used thoroughly discussed and justified?
-Is it made clear how the input data or datasets will be handled by the algorithms and techniques chosen?
 
 
 
@@ -228,31 +218,12 @@ Finally a dropout wrapper was added to the lstm network (multicell_rnn_dropout).
 
 ### Refinement
 
-#learning_rates = [1./10**i for i in range(1,7)]
-#learning_rates = [0.001]
-#batch_size = [2**i for i in range(4,10)] # [16, 32, 64, 128, 256, 512]
-#n_hidden = [2**i for i in range(4,10)]  [16, 32, 64, 128, 256, 512]
-keep_rates = [0.5 + 0.05 * i for i in range(10)]
-#training_iters = [i for i in range(5000000, 25000000, 1000000)]
-training_iters = 25000000
-
-
-For the purpose of hyperparameter tuning an additional ipython notebook was created (hypermeter_tuning.ipynb). The refinement process. Starting with 2 lstm layers, and 128 hidden units for each cell and 12000000 training iterations the learning_rate and batch size were refined.
-
-It gave the following results:
-
-.....
-
-
-In a next step, the number of hidden units were tested, while keeping learning_rate constant at 0.001. It turned out
-128 ist just sweeet.
-
-Finally training iters were tested because I say say so.
-
-Dropout was also tested, but it sucks ass, doesnt help.
-
-The final parameter are:
-
+%learning_rates = [1./10**i for i in range(1,7)]
+%batch_size = [2**i for i in range(4,10)] # [16, 32, 64, 128, 256, 512]
+%n_hidden = [2**i for i in range(4,10)]  [16, 32, 64, 128, 256, 512]
+%keep_rates = [0.5 + 0.05 * i for i in range(10)]
+%training_iters = [i for i in range(5000000, 25000000, 1000000)]
+%training_iters = 12000000
 
 
 
@@ -268,6 +239,18 @@ In this section, the final model and any supporting qualities should be evaluate
 The model parameters chosen for the project all seem in a reasonable range. Testing was performed with varius parameter combinations, and small changes in the parameter did not greatly affect the performance of the results. The author comes to the conclusion that the model can be trusted.
 
 
+As previous authors have shown (Staudemeyer, Wei, aufzählen) LSTMs architectures are generally well suited for the classification of malicous connections based on the KDD99 dataset. Unfortunately with the given architecture the author was not able to beat benchmark accuracy and other evelaution matrics, however got very close (umformulieren).
+
+All the chosen parameters (number of hidden units, number of layers, batch size, training iterations) are in a reasonable range, even though the learning rate is rather low. Since the testing set contains attack types that are not present in the training set, with an accuracy of 92.xx the model generalizes well, even though r2l and u2l metrics perform poor, however they perform in the benchmak model also poor (umschreiben).
+
+Pertubations ?
+
+- The results perform slightly worse than the benchmark model, but all chosen indicates are in a similar range. Hence the model can be trusted.
+
+
+
+
+
 
 ### Justification
 In this section, your model’s final solution and its results should be compared to the benchmark you established earlier in the project using some type of statistical analysis. You should also justify whether these results and the solution are significant enough to have solved the problem posed in the project. Questions to ask yourself when writing this section:
@@ -279,6 +262,50 @@ In this section, your model’s final solution and its results should be compare
 The found results are slightly worse than the benchmark model. Discussion of paramters of every parameter.
 
 The final solution is able to identify the majority of attacks, generatif low false positive rates for most of the malicous connections. 
+
+
+
+
+
+### Reflection
+In this section, you will summarize the entire end-to-end problem solution and discuss one or two particular aspects of the project you found interesting or difficult. You are expected to reflect on the project as a whole to show that you have a firm understanding of the entire process employed in your work. Questions to ask yourself when writing this section:
+
+- _Have you thoroughly summarized the entire process you used for this project?_  DONE
+- _Were there any interesting aspects of the project?_ DONE
+- _Were there any difficult aspects of the project?_ DONE
+- _Does the final model and solution fit your expectations for the problem, and should it be used in a general setting to solve these types of problems?_ DONE
+
+
+The project started by searching for dataset and problem, that would both satisfy my interest for deep learning and security related topis. Once an appropriate dataset was found, a technique had to be determined that would provide meaningful results for the chosen problem. 
+
+After both dataset and approach was chosen, a work environment was set up (installing packages, creating first notebook) and the data  preprocessed to have the right format to be feed to a neural network. To verify the format of the data, a basic feed-forward network was setup and the data was tested on it. Subsequently the basic neural network was altered and extended to the final RNN-LSTM architecture. 
+
+After setting up the code for the model, the hyperparameters (number of layers, number of hidden layers, batch size, learning rate, number of training iterations) were chosen after numerous experiments via grid search. Hier noch zu Dropout schreiben.
+
+The project was definitely interesting, given the freedom to choose from any dataset and use any appropriate algorithm for the chosen goal. Without a template provided that would guide through the project, exploring the problem and gradually building up knowledge and a code base was a great experience.
+
+Since a lot of examples of LSTM implementations work with univariate sequences, like text or unlabeled time-series, it was definitely challenging to adjust to architecture of the model to make use of a multivariate dataset.
+
+The expectation was to at least match the accuracy and the other evaluation metrics of the benchmark model with the chosen approach. That expectation unfortunately could not be live up to. With the current architecture it is clearly inferior to the benchmark model.
+
+
+
+### Improvement
+In this section, you will need to provide discussion as to how one aspect of the implementation you designed could be improved. As an example, consider ways your implementation can be made more general, and what would need to be modified. You do not need to make this improvement, but the potential solutions resulting from these changes are considered and compared/contrasted to your current solution. Questions to ask yourself when writing this section:
+- _Are there further improvements that could be made on the algorithms or techniques you used in this project?_
+- _Were there algorithms or techniques you researched that you did not know how to implement, but would consider using if you knew how?_
+- _If you used your final solution as the new benchmark, do you think an even better solution exists?_
+
+
+One approach that should be considered is to group the inputs into longer sequences, instead of feeding single connections to the model batchwise. A major obstacle related to this approach lies in the order of the connections. Since the connections are chronologically ordered, connections from different ip adresses are mixed together, making it really hard to filter connections that represent a sequence of attacks. Being able to filter these sequences would potentially incraease the performance of the model. However it remains unclear to the author how inputs and labels would have to be reshaped or newly created in order to be feed to an LSTM RNN. 
+
+Another potential improvement in terms of computational efficieny lies in the reduction of the input features used in the project. As seen in the correlation matrix most of the higher level features are strongly correlated and thus provide little, if not any additional information for classifying different types of malicous connections.
+
+
+
+
+
+
 
 
 

@@ -11,6 +11,10 @@ field_names = field_types['field_name'][0:41]
 
 
 def readDataKDD99():
+
+	'''
+	Reads in the data
+	'''
 	
 	header = list(read_csv('./data/Field Names.csv', header=None)[0])
 	data_train = read_csv('./data/KDD99Train.csv', names=header)
@@ -20,18 +24,34 @@ def readDataKDD99():
 
 
 def replaceAttackTypes(dataset):
+
+	'''
+	Removes a . from the labels.
+	'''
+
 	dataset['attack_type'] = dataset['attack_type'].str.replace('.', '')
 
 	return dataset
 
 
 def dropAttackIndex(dataset):
+
+	'''
+	Removes the columns 'attack_type_index' from the dataset
+	'''
+
 	dataset = dataset.drop('attack_type_index', 1)
 
 	return dataset
 
 
 def mapAttackTypes(dataset):
+
+	'''
+	Takes in the dataset.
+	Maps the different attack types to the attack type categories.
+	Returns the dataset with mapped labels.
+	'''
 	
 	intrusions = read_csv('./data/Attack Types.csv', names=['attack_type','attack_group','dataset'])
 	attack_tuples = list(zip(intrusions.attack_type, intrusions.attack_group))
@@ -43,6 +63,13 @@ def mapAttackTypes(dataset):
 
 
 def encodeFeatures(data_train, data_test):
+
+	'''
+	Takes in the training and testing set.
+	Encodes the three categorical features to integers.
+	Returns the training and testing set with encoded categorical features.
+	'''
+
 
 	le = preprocessing.LabelEncoder()
 
@@ -69,6 +96,12 @@ def encodeFeatures(data_train, data_test):
 
 def encodeLabels(data_train, data_test):
 
+	'''
+	Takes in the training and testing set.
+	Maps the connection types to integers.
+	Returns the training and testing set with encoded labels.
+	'''
+
 	attack_mapping = {'NORMAL':0,'PROBE':1,'DOS':2,'U2R':3,'R2L':4,}
 
 	data_train = data_train.replace({'attack_type':attack_mapping})
@@ -81,6 +114,11 @@ def encodeLabels(data_train, data_test):
 
 def binarizeLabels(labels):
 
+	'''
+	Takes in a list of labels
+	Returns a list of arrays of the size 5.
+	'''
+
 	lb = preprocessing.LabelBinarizer()
 
 	lb.fit([0,1,2,3,4])
@@ -91,6 +129,12 @@ def binarizeLabels(labels):
 
 
 def scaleFeatures(dataset_train, dataset_test):
+
+	'''
+	Takes in the training and testing dataset.
+	Scales the features to values between 0 and 1
+	Returns scaled training and testing sets.
+	'''
 
 	scaler = preprocessing.MinMaxScaler(feature_range=(0,1))
 
@@ -115,13 +159,26 @@ def scaleFeatures(dataset_train, dataset_test):
 
 def splitData(dataset):
 
+	'''
+	Takes in the dataset and splits the data into features and labels.
+	Returns the features and labels.
+	'''
+
 	features = dataset.ix[:,:-1]
 	labels = dataset.ix[:,-1:]
 
 	return features, labels
 
 
+
+
+
 def getBenchmarkResults():
+
+	'''
+	Returns a confusion table of the KDD99 Competition winning model.
+	'''
+
 
 	results_bench = [60262, 243, 78, 4, 6,511, 3471, 184, 0, 0, 5299, 1328, 223226, 0, 0, 68, 20, 0, 30, 10, 14527, 294, 0, 8, 1360]
 	conf_bench = np.array(results_bench).reshape(5,5)
@@ -131,6 +188,12 @@ def getBenchmarkResults():
 
 
 def computePerformanceMetrics(conf_benchmark, conf_model):
+
+
+    '''
+    Takes in the confusion table of the benchmark model and the suggested model. Based on these confusion tables, accuracy, TPR, FPR, Precsion and the F1-score are computed.
+    Returns a dictionary of the computed metrics.
+    '''
     
     metrics = {}
     
@@ -171,6 +234,12 @@ def computePerformanceMetrics(conf_benchmark, conf_model):
 
 
 def plotMetrics(metrics):
+
+	'''
+	Takes in a dictionary of metrics for both the benchmark and the suggested model. 
+	Creates a dashboard that plots the accuracy and all other evaluation metrics for the different attack types. 
+	'''
+
 
 	fig = plt.figure(figsize=(18,8))
 	gs  = gridspec.GridSpec(2, 4, height_ratios=[0.3,1])
@@ -222,9 +291,17 @@ def plotMetrics(metrics):
 
 	plt.show()
 
+	return fig
+
 
 
 def getLabelCount(dataset):
+
+	'''
+	Takes in an array of binarized labels. 
+	Returns the count of every connection type.
+	'''
+
 
 	normal = 0
 	dos = 0
@@ -250,6 +327,14 @@ def getLabelCount(dataset):
 
 
 def running_mean(l, N):
+
+    '''
+    Takes in an array of training or validation loss and an integer.
+    Applies a running mean to the loss based on the chosen integer.
+
+    Returns the transforemd array
+    '''
+
     sum = 0
     result = list( 0 for x in l)
 
@@ -265,6 +350,11 @@ def running_mean(l, N):
 
 
 def showDataDistribution(data):
+
+	'''
+	Plots the distribution of the first 18 features of the data, excluding categorial data.
+	Returns the matplotlib figure object.
+	'''
 
 	features = data.columns
 
@@ -290,7 +380,6 @@ def showDataDistribution(data):
 	ax13 = plt.subplot(gs[4, 0:1])
 	ax14 = plt.subplot(gs[4, 1:2])
 	ax15 = plt.subplot(gs[4, 2:3])
-
 
 
 	ax1.plot(data[features[0]], label=features[0])
@@ -319,6 +408,55 @@ def showDataDistribution(data):
 	return fig
 
 
+
+
+def plotMetricsWithoutAccuracy(metrics):
+
+	'''
+	Works like the plotMetrics method, but without showing the accuracy.
+	Returns the matplotlib figure object.
+	'''
+
+
+	fig = plt.figure(figsize=(18,8))
+	gs  = gridspec.GridSpec(1, 4, height_ratios=[1])
+
+	ax2 = plt.subplot(gs[0, 0:1])
+	ax3 = plt.subplot(gs[0, 1:2])
+	ax4 = plt.subplot(gs[0, 2:3])
+	ax5 = plt.subplot(gs[0, 3:4])
+
+	x1 = [1,5,9,13,17]
+	x2 = [2,6,10,14,18]
+
+	ax2.bar(x1, metrics['tpr_bench'], label='Benchmark')
+	ax2.bar(x2, metrics['tpr_model'], label="Model")
+	ax2.set_xlabel('TPR', weight='bold')
+	ax2.set_xticks([1.5,5.5,9.5,13.5,17.5])
+	ax2.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
+	ax2.legend()
+
+	ax3.bar(x1, metrics['fpr_bench'], label='Benchmark')
+	ax3.bar(x2, metrics['fpr_model'], label="Model")
+	ax3.set_xlabel('FPR', weight='bold')
+	ax3.set_xticks([1.5,5.5,9.5,13.5,17.5])
+	ax3.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
+
+	ax4.bar(x1, metrics['prec_bench'], label='Benchmark')
+	ax4.bar(x2, metrics['prec_model'], label="Model")
+	ax4.set_xlabel('Precision', weight='bold')
+	ax4.set_xticks([1.5,5.5,9.5,13.5,17.5])
+	ax4.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
+
+	ax5.bar(x1, metrics['f1_bench'], label='Benchmark')
+	ax5.bar(x2, metrics['f1_model'], label="Model")
+	ax5.set_xlabel('F1-Score', weight='bold')
+	ax5.set_xticks([1.5,5.5,9.5,13.5,17.5])
+	ax5.set_xticklabels(['NORMAL','PROBE','DOS','U2R','R2L'], size='smaller')
+
+	plt.show()
+
+	return fig
 
 
 
